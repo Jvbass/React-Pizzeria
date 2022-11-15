@@ -15,6 +15,11 @@
   box-sizing: border-box;
 }
 
+main {
+  margin-top: 56px ;
+  max-width: 1200px;
+  margin: auto;
+}
 
 body {
   font-family: "Assistant", sans-serif;
