@@ -1,6 +1,6 @@
 import { formatPrice } from "../utils/utils";
 
-const CartList = ({ cart }) => {
+const CartList = ({ cart, addToCart }) => {
   return (
     <div className="cart-view">
       <ul>
@@ -13,11 +13,11 @@ const CartList = ({ cart }) => {
               </div>
 
               <div className="price">
-                <span>${formatPrice(item.price)}</span>
+                <span>${formatPrice(item.price * item.count)}</span>
                 <div className="btns">
-                    <button className="btn">-</button>
-                    <p className="bold">1</p>
-                    <button className="btn">+</button>
+                    <button className="btn-secondary btn-cart">-</button>
+                    <p className="bold">{item.count}</p>
+                    <button className="btn-primary btn-cart" onClick={()=>addToCart(item)}>+</button>
                 </div>
               </div>
             </li>
@@ -26,6 +26,7 @@ const CartList = ({ cart }) => {
       </ul>
       <div className="total">
         <h3>Total: $0</h3>
+        <button className="btn btn-primary">Pagar</button>
       </div>
     </div>
   );

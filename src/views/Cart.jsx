@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Context from "../context/context";
 
 const Cart = () => {
-  const { cart } = useContext(Context);
+  const { cart, addToCart } = useContext(Context);
 
   return (
     <main>
@@ -11,7 +11,7 @@ const Cart = () => {
         <h2>Detalles del pedido</h2>
         {
             cart.length !==0 ? 
-            <CartList cart={cart}></CartList> 
+            <CartList cart={cart} addToCart={addToCart}></CartList> 
             : <p> no hay elementos en tu carrito</p>
         }
       </div>

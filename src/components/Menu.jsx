@@ -7,7 +7,7 @@ import Ingredients from "./Ingredients.jsx";
 import {formatPrice} from '../utils/utils.js'
 
 const Menu = () => {
-  const { menu } = useContext(Context);
+  const { menu, addToCart } = useContext(Context);
   const navigate = useNavigate()
 
   const viewPizza = (id) => navigate(`/pizza/${id}`)
@@ -23,7 +23,7 @@ const Menu = () => {
               <h4 className="price">$ {formatPrice(item.price)}</h4>
               <div className="card-btn">
                 <button className="btn btn-secondary" onClick={()=> viewPizza(item.id)}>Ver más</button>
-                <button className="btn btn-primary">Añadir</button>
+                <button className="btn btn-primary" onClick={()=>addToCart(item)}>Añadir</button>
               </div>
             </div>
           </div>

@@ -9,7 +9,7 @@ import {formatPrice} from '../utils/utils.js'
 
 const Pizza = () => {
   const { id } = useParams();
-  const { menu } = useContext(Context);
+  const { menu, addToCart } = useContext(Context);
 
   const [pizza, setPizza] = useState({ingredients:[], price: 0});
 
@@ -33,7 +33,7 @@ const Pizza = () => {
 
             <div className="price-row">
               <h3>Precio: {formatPrice(pizza.price)} </h3>
-              <button className="btn">Añadir</button>
+              <button className="btn btn-primary" onClick={()=>addToCart(pizza)}>Añadir</button>
             </div>
           </article>
       </div>

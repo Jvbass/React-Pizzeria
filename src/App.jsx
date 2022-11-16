@@ -3,39 +3,54 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 // views
 import Home from "./views/Home.jsx";
-import Pizza from "./views/Pizza.jsx"
+import Pizza from "./views/Pizza.jsx";
 import Cart from "./views/Cart.jsx";
 import NotFound from "./views/NotFound.jsx";
 
 // components
 import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 
 import Context from "./context/context.js";
 import "./App.css";
 
 function App() {
   const [menu, setMenu] = useState([]);
-  const [cart, setCart] = useState([
-    {
-      "desc": "La pizza napolitana, de masa tierna y delgada pero bordes altos, es la versión propia de la cocina napolitana de la pizza redonda. El término pizza napoletana, por su importancia histórica o regional, se emplea en algunas zonas como sinónimo de pizza tonda.",
-      "id": "P001",
-      "img": "https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_cl.jpg?alt=media&token=6a9a33da-5c00-49d4-9080-784dcc87ec2c",
-      "ingredients": ["mozzarella", "tomates", "jamón", "orégano"],
-      "name": "napolitana",
-      "price": 5950
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (item) => {
+    //funcion agrega pizza al carro
+    const itemIndex = cart.findIndex((pizza) => pizza.id === item.id);
+    //verifica si la pizza que vamos a agregar ya existe, si no devuelve -1
+
+    const updateCart = [...cart];
+
+    if (itemIndex === -1) {
+      //si no existe pizza en el carro hacemos push  
+      const pizza = {
+        id: item.id,
+        count: 1,
+        price: item.price,
+        img: item.img,
+        name: item.name,
+      };
+      updateCart.push(pizza);
+    } else {
+      updateCart[itemIndex].count += 1; //si existe sumamos 1 en campo cuenta
     }
-  ])
+    setCart(updateCart)
+  };
 
   useEffect(() => {
-    fetch('/pizzas.json')
+    fetch("/pizzas.json")
       .then((res) => res.json())
       .then((json) => {
         setMenu(json);
       })
       .catch((e) => console.log(e));
-      }, []);
+  }, []);
 
-  const globalState = { menu, cart };
+  const globalState = { menu, cart, addToCart };
 
   return (
     <div className="App">
@@ -48,6 +63,7 @@ function App() {
             <Route path="/carrito" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer></Footer>
         </BrowserRouter>
       </Context.Provider>
     </div>
