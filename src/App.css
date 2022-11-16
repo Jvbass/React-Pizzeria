@@ -208,8 +208,7 @@
 /* ***cart*** */
 .cart {
   margin: 8rem 1.15rem 0 1.15rem;
-  height: calc(100vh - 6rem);
-  
+  min-height: calc(100vh - 200px);
 }
 
 .cart h2{
@@ -246,6 +245,14 @@
   text-transform: capitalize;
   font-size: 1.2rem;
 }
+
+.cart p{
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--dark);
+}
+
 .btns{
   margin: 1.5rem;
   display: flex;
@@ -257,7 +264,9 @@
   padding: 10px 14px;
   border-radius: 5px;
   text-align: center;
+  cursor: pointer;
 }
+
 .btns .bold{
   margin: .25rem;
 }
@@ -303,8 +312,8 @@
 /* ***footer *** */
 footer{
   display: flex;
-  height: 56px; 
-  background-color: var(--disabled);
+  height: 5rem; 
+  background-color: var(--primary);
   justify-content: space-around;
   align-items: center;
 }

@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 
 import Context from "./context/context.js";
+import { formatPrice } from "./utils/utils.js";
 import "./App.css";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
     const updateCart = [...cart];
 
     if (itemIndex === -1) {
-      //si no existe pizza en el carro hacemos push  
+      //si no existe pizza en el carro hacemos push
       const pizza = {
         id: item.id,
         count: 1,
@@ -38,8 +39,26 @@ function App() {
     } else {
       updateCart[itemIndex].count += 1; //si existe sumamos 1 en campo cuenta
     }
+    setCart(updateCart);
+  };
+
+  const removeFromCart = (item) => {
+    const itemIndex = cart.findIndex((pizza) => pizza.id === item.id);
+    const updateCart = [...cart];
+
+    updateCart[itemIndex].count -=1
+    if (updateCart[itemIndex].count <= 0){
+      updateCart.splice(itemIndex ,1)
+    }
     setCart(updateCart)
   };
+
+  const cartTotal = ()=> {
+    let total = 0
+    cart.forEach((item) => total += item.count * item.price);
+
+    return formatPrice(total)
+  }
 
   useEffect(() => {
     fetch("/pizzas.json")
@@ -50,7 +69,7 @@ function App() {
       .catch((e) => console.log(e));
   }, []);
 
-  const globalState = { menu, cart, addToCart };
+  const globalState = { menu, cart, addToCart, removeFromCart, cartTotal };
 
   return (
     <div className="App">
