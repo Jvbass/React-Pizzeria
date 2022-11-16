@@ -1,4 +1,5 @@
 import { formatPrice } from "../utils/utils";
+import { Link } from "react-router-dom";
 
 const CartList = ({ cart, addToCart, removeFromCart, cartTotal }) => {
   return (
@@ -36,7 +37,9 @@ const CartList = ({ cart, addToCart, removeFromCart, cartTotal }) => {
       </ul>
       <div className="total">
         <h3>Total: ${cartTotal()}</h3>
-        <button className="btn btn-primary">Pagar</button>
+        <Link to="/checkout">
+          <button className="btn btn-primary">Pagar</button>
+        </Link>
       </div>
     </div>
   );

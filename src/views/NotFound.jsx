@@ -11,7 +11,7 @@ const NotFound = () => {
       />
       <span>404!</span>
       <Link to="/">
-        <button className="btn">Volver al home</button>
+        <button className="btn btn-primary">Volver al home</button>
       </Link>
     </div>
   );

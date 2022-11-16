@@ -6,6 +6,7 @@ import Home from "./views/Home.jsx";
 import Pizza from "./views/Pizza.jsx";
 import Cart from "./views/Cart.jsx";
 import NotFound from "./views/NotFound.jsx";
+import Checkout from "./views/Checkout.jsx";
 
 // components
 import Navbar from "./components/Navbar.jsx";
@@ -46,19 +47,19 @@ function App() {
     const itemIndex = cart.findIndex((pizza) => pizza.id === item.id);
     const updateCart = [...cart];
 
-    updateCart[itemIndex].count -=1
-    if (updateCart[itemIndex].count <= 0){
-      updateCart.splice(itemIndex ,1)
+    updateCart[itemIndex].count -= 1;
+    if (updateCart[itemIndex].count <= 0) {
+      updateCart.splice(itemIndex, 1);
     }
-    setCart(updateCart)
+    setCart(updateCart);
   };
 
-  const cartTotal = ()=> {
-    let total = 0
-    cart.forEach((item) => total += item.count * item.price);
+  const cartTotal = () => {
+    let total = 0;
+    cart.forEach((item) => (total += item.count * item.price));
 
-    return formatPrice(total)
-  }
+    return formatPrice(total);
+  };
 
   useEffect(() => {
     fetch("/pizzas.json")
@@ -81,6 +82,7 @@ function App() {
             <Route path="/pizza/:id" element={<Pizza />} />
             <Route path="/carrito" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
           <Footer></Footer>
         </BrowserRouter>
